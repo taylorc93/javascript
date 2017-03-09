@@ -54,7 +54,8 @@ module.exports = {
 
     // do not allow a default import name to match a named export
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default.md
-    'import/no-named-as-default': 'error',
+    // Do not use to allow exporting unconnected versions of React components
+    'import/no-named-as-default': 'off',
 
     // warn on accessing default export property names that are also named exports
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default-member.md
@@ -67,7 +68,8 @@ module.exports = {
     // Forbid the use of extraneous packages
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
     // paths are treated both as absolute paths, and relative to process.cwd()
-    'import/no-extraneous-dependencies': ['error', {
+    // Disable to allow use of local package.json files for a module
+    'import/no-extraneous-dependencies': ['off', {
       devDependencies: [
         'test/**', // tape, common npm pattern
         'tests/**', // also common npm pattern
@@ -136,9 +138,9 @@ module.exports = {
     // Enforce a convention in module import order
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md
     // TODO: enable?
-    'import/order': ['off', {
+    'import/order': ['warn', {
       groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-      'newlines-between': 'never',
+      'newlines-between': 'always',
     }],
 
     // Require a newline after the last import/require in a group

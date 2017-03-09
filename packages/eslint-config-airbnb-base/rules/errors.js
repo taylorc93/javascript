@@ -118,7 +118,7 @@ module.exports = {
 
     // ensure JSDoc comments are valid
     // http://eslint.org/docs/rules/valid-jsdoc
-    'valid-jsdoc': 'off',
+    'valid-jsdoc': 'warn',
 
     // ensure that the results of typeof are compared against a valid string
     // http://eslint.org/docs/rules/valid-typeof

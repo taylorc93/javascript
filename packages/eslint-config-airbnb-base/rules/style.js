@@ -60,8 +60,9 @@ module.exports = {
 
     // enforces use of function declarations or expressions
     // http://eslint.org/docs/rules/func-style
-    // TODO: enable
-    'func-style': ['off', 'expression'],
+    'func-style': ['error', 'expression', {
+        "allowArrowFunctions": true
+    }],
 
     // Blacklist certain identifiers to prevent them being used
     // http://eslint.org/docs/rules/id-blacklist
@@ -80,10 +81,12 @@ module.exports = {
       SwitchCase: 1,
       VariableDeclarator: 1,
       outerIIFEBody: 1,
-      // MemberExpression: null,
-      // CallExpression: {
-        // parameters: null,
-      // },
+      MemberExpression: 1,
+      CallExpression: {
+        arguments: 1,
+      },
+      "ArrayExpression": 1,
+      "ObjectExpression": 1,
       FunctionDeclaration: {
         parameters: 1,
         body: 1
@@ -115,7 +118,7 @@ module.exports = {
     // enforce position of line comments
     // http://eslint.org/docs/rules/line-comment-position
     // TODO: enable?
-    'line-comment-position': ['off', {
+    'line-comment-position': ['warn', {
       position: 'above',
       ignorePattern: '',
       applyDefaultPatterns: true,
@@ -126,7 +129,9 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
 
     // enforces empty lines around comments
-    'lines-around-comment': 'off',
+    'lines-around-comment': ['error', {
+      "beforeBlockComment": true
+    }],
 
     // require or disallow newlines around directives
     // http://eslint.org/docs/rules/lines-around-directive
@@ -140,7 +145,7 @@ module.exports = {
 
     // specify the maximum length of a line in your program
     // http://eslint.org/docs/rules/max-len
-    'max-len': ['error', 100, 2, {
+    'max-len': ['error', 80, 2, {
       ignoreUrls: true,
       ignoreComments: false,
       ignoreRegExpLiterals: true,
@@ -160,7 +165,7 @@ module.exports = {
     'max-nested-callbacks': 'off',
 
     // limits the number of parameters that can be used in the function declaration.
-    'max-params': ['off', 3],
+    'max-params': ['warn', 3],
 
     // specify the maximum number of statement allowed in a function
     'max-statements': ['off', 10],
@@ -172,7 +177,7 @@ module.exports = {
     // require multiline ternary
     // http://eslint.org/docs/rules/multiline-ternary
     // TODO: enable?
-    'multiline-ternary': ['off', 'never'],
+    'multiline-ternary': ['error', 'always'],
 
     // require a capital letter for constructors
     'new-cap': ['error', {
@@ -190,12 +195,12 @@ module.exports = {
     'newline-after-var': 'off',
 
     // http://eslint.org/docs/rules/newline-before-return
-    'newline-before-return': 'off',
+    'newline-before-return': 'error',
 
     // enforces new line after each method call in the chain to make it
     // more readable and easy to maintain
     // http://eslint.org/docs/rules/newline-per-chained-call
-    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 4 }],
+    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
 
     // disallow use of the Array constructor
     'no-array-constructor': 'error',
@@ -243,7 +248,7 @@ module.exports = {
     'no-negated-condition': 'off',
 
     // disallow nested ternary expressions
-    'no-nested-ternary': 'error',
+    'no-nested-ternary': 'off',
 
     // disallow use of the Object constructor
     'no-new-object': 'error',
@@ -296,9 +301,9 @@ module.exports = {
     // enforce line breaks between braces
     // http://eslint.org/docs/rules/object-curly-newline
     // TODO: enable once https://github.com/eslint/eslint/issues/6488 is resolved
-    'object-curly-newline': ['off', {
-      ObjectExpression: { minProperties: 0, multiline: true },
-      ObjectPattern: { minProperties: 0, multiline: true }
+    'object-curly-newline': ['error', {
+      ObjectExpression: { minProperties: 3, multiline: true },
+      ObjectPattern: { minProperties: 3, multiline: true }
     }],
 
     // enforce "same line" or "multiple line" on object properties.
@@ -326,13 +331,18 @@ module.exports = {
 
     // require quotes around object literal property names
     // http://eslint.org/docs/rules/quote-props.html
-    'quote-props': ['error', 'as-needed', { keywords: false, unnecessary: true, numbers: false }],
+    'quote-props': ['error', 'as-needed', {
+      keywords: false,
+      unnecessary: true,
+      numbers: false
+    }],
 
     // specify whether double or single quotes should be used
-    quotes: ['error', 'single', { avoidEscape: true }],
+    quotes: ['error', 'backtick'],
 
     // do not require jsdoc
     // http://eslint.org/docs/rules/require-jsdoc
+    // TODO: Enable
     'require-jsdoc': 'off',
 
     // require or disallow use of semicolons instead of ASI
@@ -342,7 +352,7 @@ module.exports = {
     'semi-spacing': ['error', { before: false, after: true }],
 
     // requires object keys to be sorted
-    'sort-keys': ['off', 'asc', { caseSensitive: false, natural: true }],
+    'sort-keys': ['warn', 'asc', { caseSensitive: false, natural: true }],
 
     // sort variables within the same declaration block
     'sort-vars': 'off',
